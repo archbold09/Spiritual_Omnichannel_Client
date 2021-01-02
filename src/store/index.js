@@ -5,14 +5,18 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    layout: '',
     sidebar: {
       baseSidebar: true,
     },
   },
   mutations: {
-    baseSidebarState(state, value) {
-      state.sidebar.baseSidebar = value;
+    baseSidebarState(state) {
+      state.sidebar.baseSidebar = !state.sidebar.baseSidebar
     },
+    SET_LAYOUT (state, newLayout) {
+      state.layout = newLayout
+    }
   },
   actions: {},
   modules: {},

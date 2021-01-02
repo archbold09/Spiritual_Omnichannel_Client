@@ -21,12 +21,10 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 export default {
   methods: {
-    baseSidebarState() {
-      let sidebarState = this.$store.state.sidebar.baseSidebar;
-      this.$store.commit("baseSidebarState", !sidebarState);
-    },
+    ...mapMutations(["baseSidebarState"]),
   },
 };
 </script>
