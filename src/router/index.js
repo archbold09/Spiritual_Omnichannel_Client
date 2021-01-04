@@ -1,14 +1,23 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 // import Layout from "@/components/Layout.vue";
-// import Home from '../views/Home.vue'
+import Home from '../views/Home.vue'
 import Contact from "@/views/Contact.vue";
 import Inbox from "@/views/Inbox.vue";
+import Login from '../views/Login.vue'
+import Error404 from '../views/Error404.vue'
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
+    name: "Login",
+    component: Login,
+  },
+  {
+    path: "/home",
+    name: "Home",
+    component: Home,
   },
   {
     path: "/contact",
@@ -28,6 +37,11 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/About.vue"),
+  },
+  {
+    path: "*",
+    name: "Error404",
+    component: Error404,
   },
 ];
 

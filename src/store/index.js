@@ -5,18 +5,27 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    layout: '',
+    token: "",
+    layout: "",
     sidebar: {
       baseSidebar: true,
     },
   },
-  mutations: {
-    baseSidebarState(state) {
-      state.sidebar.baseSidebar = !state.sidebar.baseSidebar
+  getters: {
+    token: (state) => {
+      return state.token;
     },
-    SET_LAYOUT (state, newLayout) {
-      state.layout = newLayout
-    }
+  },
+  mutations: {
+    setToken(state, token) {
+      state.token = token;
+    },
+    baseSidebarState(state) {
+      state.sidebar.baseSidebar = !state.sidebar.baseSidebar;
+    },
+    SET_LAYOUT(state, newLayout) {
+      state.layout = newLayout;
+    },
   },
   actions: {},
   modules: {},
