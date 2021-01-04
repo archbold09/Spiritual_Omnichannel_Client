@@ -95,8 +95,9 @@ export default {
             alert(response.data.message);
           } else {
             this.$store.commit("setToken", response.data.token);
+            this.$store.commit("setToken", response.data.setUser);
             API.defaults.headers.common["Authorization"] = response.data.token;
-            this.$router.push("/home");
+            this.$router.push("/dashboard/home");
           }
         } catch (error) {
           console.error(error);

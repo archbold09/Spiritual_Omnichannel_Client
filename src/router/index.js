@@ -1,42 +1,46 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import store from "@/store";
+// import API from '@/api'
 // import Layout from "@/components/Layout.vue";
-import Home from '../views/Home.vue'
+
+import Home from "../views/Home.vue";
 import Contact from "@/views/Contact.vue";
 import Inbox from "@/views/Inbox.vue";
-import Login from '../views/Login.vue'
-import Error404 from '../views/Error404.vue'
+import Login from "../views/Login.vue";
+import Error404 from "../views/Error404.vue";
+
+//layouts
+import LayoutLogin from "../layouts/LayoutLogin.vue";
+import LayoutDashboard from "../layouts/LayoutDashboard.vue";
+// import API from "../api";
+
 Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/",
+    path: "/login",
     name: "Login",
     component: Login,
+    meta: { layout: LayoutLogin },
   },
   {
-    path: "/home",
+    path: "/dashboard/home",
     name: "Home",
     component: Home,
+    meta: { layout: LayoutDashboard },
   },
   {
-    path: "/contact",
+    path: "/dashboard/contact",
     name: "Contact",
     component: Contact,
+    meta: { layout: LayoutDashboard },
   },
   {
-    path: "/inbox",
+    path: "/dashboard/inbox",
     name: "Inbox",
     component: Inbox,
-  },
-  {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue"),
+    meta: { layout: LayoutDashboard },
   },
   {
     path: "*",
@@ -49,6 +53,12 @@ const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  const protectedRoutes = ["/dashboard/home"];
+  if (protectedRoutes.includes(to.path) && !store.getters.token) next("/login");
+  else next();
 });
 
 export default router;
